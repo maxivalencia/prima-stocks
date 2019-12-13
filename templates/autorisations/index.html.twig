@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autorisations Liste{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Autorisations</h1>
+    </div>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for autorisation in autorisations %}
+            <tr>
+                <td>{{ autorisation.id }}</td>
+                <td>
+                    <a href="{{ path('autorisations_show', {'id': autorisation.id}) }}" class="btn btn-warning">voir</a>
+                    <a href="{{ path('autorisations_edit', {'id': autorisation.id}) }}" class="btn btn-danger">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">Aucun enregistrement trouver!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(autorisations) }}
+    </div>
+
+    <a href="{{ path('autorisations_new') }}" class="btn btn-success">Créer</a>
+</div>
+{% endblock %}

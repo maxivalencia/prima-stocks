@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition Unité{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Edition Unité</h1>
+    </div>
+    <hr>
+
+    {{ include('unites/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <br>
+    <a href="{{ path('unites_index') }}" class="btn btn-primary">Retour</a>
+    <br><br>
+    {{ include('unites/_delete_form.html.twig') }}
+</div>
+{% endblock %}

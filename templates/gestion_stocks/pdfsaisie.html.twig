@@ -1,0 +1,107 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}impression de mouvement{% endblock %} #}
+{# <link href="/css/pdf.css" rel="stylesheet"/> #}
+<style>
+    table thead tr th {
+        border: 0;
+    }
+
+    table tbody tr td {
+        border: 1px solid #ccc;
+    }
+
+    .tableau {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        border: 1px solid black;
+    }
+
+    .tableau thead tr th,
+    .tableau tbody tr td {
+        border: 1px solid black;
+    }
+
+    th {
+        background: rgb(130, 130, 130);
+        height: 30px;
+        vertical-align: middle;
+        align: center;
+    }
+</style>
+{% block body %}
+<div class="container" style="margin-left:20px">
+    <div class="row" align="center">
+        <img src="{{ logo }}" alt="logo" height="150px" type="images/png">
+    </div>
+    <div class="row" align="center">
+        <h1>Bon de sortie</h1>
+    </div>
+    <div class="row" style="margin-left:50px">
+        <h3>Référence : {{ reference }}</h3>
+        <p><strong>Date et heure : </strong>{{ datesaisie|date('Y-m-d H:m:s')  }}</p>
+    {# <h3>Demandeur : </h3>#}
+        <p><strong>Opérateur : </strong>{{ operateur.nom }} {{ operateur.prenom }}</p>
+        <p><strong>Objet : </strong>{{ objet }}</p>
+        <p><strong>Ticket : </strong></p>
+        <p><strong>Client : </strong>{{ client }}</p>
+        {# <p><strong>Code Site et PROJET : <strong></p> #}
+    </div>{# 
+    <div class="row">
+        <h3>Réf GDA :</h3>
+    </div> #}
+    <table class="tableau">
+        <thead>
+            <tr>
+                <th width="20px" align="center">Item</th>
+                <th width="20px" align="center">Produit</th>
+                <th width="200px" align="center">Désignation</th>
+                <th width="20px" align="center">Unité</th>
+                {# <th>CauseAnnulation</th> #}
+                <th width="20px" align="center">Quantité</th>
+                {# <th>DateValidation</th> #}
+                <th width="100px" align="center">REMARQUES</th>
+                {# <th>actions</th> #}
+            </tr>
+        </thead>
+        <tbody>
+        {% set myVal = 1 %}
+        {% for stock in stocks %}
+            <tr>
+                <td align="center">{{ myVal }}</td>
+                <td align="center">{{ stock.produit.designation }}</td>
+                <td>{{ stock.produit }}</td>
+                <td align="center">{{ stock.unite}}</td>
+                <td align="center">{{ stock.quantite }}</td>
+                {# <td>{{ stock.causeAnnulation }}</td> #}
+                {# <td>{{ stock.dateSaisie ? stock.dateSaisie|date('Y-m-d H:i:s') : '' }}</td> #}
+                {# <td>{{ stock.dateValidation ? stock.dateValidation|date('Y-m-d H:i:s') : '' }}</td> #}
+                <td>{{ stock.causeAnnulation }} {{ stock.Remarque }}</td>
+                {# <td> #}
+                    {# <a href="{{ path('validation', {'id': stock.id}) }}" class="btn btn-primary">voir</a> #}
+                    {# <a href="{{ path('stocks_edit', {'id': stock.id}) }}" class="btn btn-danger">edit</a> #}
+                {# </td> #}
+            </tr>
+            {% set myVal = myVal + 1 %}
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement trouver!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td align="center">
+                (Nom du demandeur)<br>
+                (Date et heure de la demande)
+            </td>
+            <td align="center">
+                {{ validateur.nom }} {{ validateur.prenom }}<br>
+                {{ datevalidation|date('Y-m-d H:m:s') }}
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

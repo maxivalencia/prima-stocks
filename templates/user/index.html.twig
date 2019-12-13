@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur Liste{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Utilisateurs</h1>
+    </div>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Login</th>
+                {# <th>Password</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.login }}</td>
+                {# <td>{{ user.password }}</td> #}
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-warning">voir</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-danger">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun enregistrement trouver!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(users) }}
+    </div>
+
+    <a href="{{ path('user_new') }}" class="btn btn-success">Créer</a>
+</div>
+{% endblock %}

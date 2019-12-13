@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clients Liste{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Clients</h1>
+    </div>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Tel</th>
+                <th>Mail</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.adresse }}</td>
+                <td>{{ client.tel }}</td>
+                <td>{{ client.mail }}</td>
+                <td>
+                    <a href="{{ path('clients_show', {'id': client.id}) }}" class="btn btn-warning">voir</a>
+                    <a href="{{ path('clients_edit', {'id': client.id}) }}" class="btn btn-danger">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun enregistrement trouver!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(clients) }}
+    </div>
+
+    <a href="{{ path('clients_new') }}" class="btn btn-success">Créer</a>
+</div>
+{% endblock %}

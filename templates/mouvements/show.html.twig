@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mouvement{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Mouvement</h1>
+    </div>
+    <hr>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>{{ mouvement.id }}</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>{{ mouvement.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('mouvements_index') }}" class="btn btn-primary">Retour</a>
+    <br><br>
+    <a href="{{ path('mouvements_edit', {'id': mouvement.id}) }}" class="btn btn-warning">Edition</a>
+    <br><br>
+    {{ include('mouvements/_delete_form.html.twig') }}
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition Validation{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Edition Validation</h1>
+    </div>
+    <hr>
+
+    {{ include('validations/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <br>
+    <a href="{{ path('validations_index') }}" class="btn btn-primary">Retour</a>
+    <br><br>
+    {{ include('validations/_delete_form.html.twig') }}
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversions{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Conversions</h1>
+    </div>
+    <hr>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Produit</td>
+                <td>{{ conversion.produits }}</td>
+            </tr>
+            <tr>
+                <td>Unité source</td>
+                <td>{{ conversion.unitesource }}</td>
+            </tr>
+            <tr>
+                <td>Valeur</td>
+                <td>{{ conversion.valeur }}</td>
+            </tr>
+            <tr>
+                <td>Unité destinataire</td>
+                <td>{{ conversion.unitesdestinataire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('conversions_index') }}" class="btn btn-primary">Retour</a>
+    <br><br>
+    <a href="{{ path('conversions_edit', {'id': conversion.id}) }}" class="btn btn-warning">Edition</a>
+    <br><br>
+    {{ include('conversions/_delete_form.html.twig') }}
+</div>
+{% endblock %}

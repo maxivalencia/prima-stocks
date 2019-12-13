@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique de mouvement{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Liste des produits du reférence {{ reference }}</h1>
+    </div>
+    <hr>
+    <h2><strong> - Projet : </strong>{{ projet }}</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Désignation</th>
+                <th>Quantite</th>
+                <th>Unité</th>
+                <th>Projet</th>
+                <th>Mouvement</th>
+                <th>Client</th>
+                <th>Saisisseur</th>
+                <th>Validateur</th>
+                <th>Autre source</th>
+                <th>Site</th>
+                {# <th>CauseAnnulation</th> #}
+                <th>Date Saisie</th>
+                {# <th>DateValidation</th> #}
+                <th>Détails</th>
+                {# <th>actions</th> #}
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.produit }}</td>
+                <td>{{ stock.produit.designation }}</td>
+                <td>{{ stock.quantite }}</td>
+                <td>{{ stock.unite }}</td>
+                <td>{{ stock.projet }}</td>
+                <td>{{ stock.mouvement }}</td>
+                <td>{{ stock.client }}</td>
+                <td>{{ stock.operateur }}</td>
+                <td>{{ stock.validateur }}</td>
+                <td>{{ stock.AutreSource }}</td>
+                <td>{{ stock.Site }}</td>
+                {# <td>{{ stock.causeAnnulation }}</td> #}
+                <td>{{ stock.dateSaisie ? stock.dateSaisie|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ stock.dateValidation ? stock.dateValidation|date('Y-m-d H:i:s') : '' }}</td> #}
+                <td>{{ stock.causeAnnulation }} {{ stock.Remarque }}</td>
+                <td>
+                    {# <a href="{{ path('validation', {'id': stock.id}) }}" class="btn btn-primary">voir</a> #}
+                    {# <a href="{{ path('stocks_edit', {'id': stock.id}) }}" class="btn btn-danger">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement trouver!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<br><br>
+                <tr>
+                    <th width="200">Piece-jointes : </th>
+                    <td>
+                        {# <a href="{{ asset('uploads/piecejointe/' ~ dossier.piecejointes) }}">{{ dossier.piecejointes }}</a> #}
+                        {% for piece in piecejointe %}
+                            {{ piece.nomFichier }}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+<br><br>
+    <div class="navigation">
+        {{ knp_pagination_render(stocks) }}
+    </div>
+    <br><br>
+    <a href="{{ path('historiques') }}" class="btn btn-primary">Retour</a>
+    {# <a href="{{ path('modifier', {'ref': reference}) }}" class="btn btn-success">Modifier</a>
+    <a href="{{ path('annuler', {'ref': reference}) }}" class="btn btn-danger">Annuler</a> #}
+
+    <a href="{{ path('pdf', {'ref': reference}) }}" class="btn btn-primary">Imprimer</a>
+</div>
+{% endblock %}

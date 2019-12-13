@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stock{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Stock</h1>
+    </div>
+    <hr>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>{{ stock.id }}</td>
+            </tr>
+            <tr>
+                <td>Quantite</td>
+                <td>{{ stock.quantite }}</td>
+            </tr>
+            <tr>
+                <td>CauseAnnulation</td>
+                <td>{{ stock.causeAnnulation }}</td>
+            </tr>
+            <tr>
+                <td>DateSaisie</td>
+                <td>{{ stock.dateSaisie ? stock.dateSaisie|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <td>DateValidation</td>
+                <td>{{ stock.dateValidation ? stock.dateValidation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <td>ReferencePanier</td>
+                <td>{{ stock.referencePanier }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('stocks_index') }}" class="btn btn-primary">Retour</a>
+    <br><br>
+    <a href="{{ path('stocks_edit', {'id': stock.id}) }}" class="btn btn-warning">Edition</a>
+    <br><br>
+    {{ include('stocks/_delete_form.html.twig') }}
+</div>
+{% endblock %}

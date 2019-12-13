@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet Liste{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Projet</h1>
+    </div>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom Projet/Client</th>
+                <th>Reference</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for projet in projets %}
+            <tr>
+                <td>{{ projet.id }}</td>
+                <td>{{ projet.nom }}</td>
+                <td>{{ projet.reference }}</td>
+                <td>
+                    <a href="{{ path('projet_show', {'id': projet.id}) }}" class="btn btn-warning">voir</a>
+                    <a href="{{ path('projet_edit', {'id': projet.id}) }}" class="btn btn-danger">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun enregistrement trouver!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(projets) }}
+    </div>
+
+    <a href="{{ path('projet_new') }}" class="btn btn-success">Créer</a>
+</div>
+{% endblock %}

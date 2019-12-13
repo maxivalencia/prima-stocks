@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversions Liste{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Conversion</h1>
+    </div>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>Produit</th>
+                <th>Unité d'origine</th>
+                <th>Valeur de conversion</th>
+                <th>Unité de conversion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for conversion in conversions %}
+            <tr>
+                {# <td>{{ conversion.id }}</td> #}
+                <td>{{ conversion.produits }}</td>
+                <td>{{ conversion.unitesource }}</td>
+                <td>{{ conversion.valeur }}</td>
+                <td>{{ conversion.unitesdestinataire }}</td>
+                <td>
+                    <a href="{{ path('conversions_show', {'id': conversion.id}) }}" class="btn btn-warning">voir</a>
+                    <a href="{{ path('conversions_edit', {'id': conversion.id}) }}" class="btn btn-danger">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun enregistrement trouver!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(conversions) }}
+    </div>
+
+    <a href="{{ path('conversions_new') }}" class="btn btn-success">Créer</a>
+</div>
+{% endblock %}
