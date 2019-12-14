@@ -37,7 +37,8 @@ class SortieType extends AbstractType
             ->add('reference')
             ->add('quantite', TextType::class)
             ->add('unite')
-            ->add('projet')
+            ->add('Projets')
+            ->add('Demandeur')
             //->add('mouvement')
             ->add('Site')
             ->add('AutreSource', null, [

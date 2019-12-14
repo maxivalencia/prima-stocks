@@ -129,6 +129,16 @@ class Stocks
      */
     private $reference;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Projets;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Demandeur;
+
     public function __construct()
     {
         $this->stocks = new ArrayCollection();
@@ -406,6 +416,30 @@ class Stocks
     public function setReference(?string $reference): self
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getProjets(): ?string
+    {
+        return $this->Projets;
+    }
+
+    public function setProjets(string $Projets): self
+    {
+        $this->Projets = $Projets;
+
+        return $this;
+    }
+
+    public function getDemandeur(): ?string
+    {
+        return $this->Demandeur;
+    }
+
+    public function setDemandeur(string $Demandeur): self
+    {
+        $this->Demandeur = $Demandeur;
 
         return $this;
     }

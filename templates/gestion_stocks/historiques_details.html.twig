@@ -23,6 +23,7 @@
                 <th>Saisisseur</th>
                 <th>Validateur</th>
                 <th>Autre source</th>
+                <th>Demandeur</th>
                 <th>Site</th>
                 {# <th>CauseAnnulation</th> #}
                 <th>Date Saisie</th>
@@ -38,15 +39,16 @@
                 <td>{{ stock.produit.designation }}</td>
                 <td>{{ stock.quantite }}</td>
                 <td>{{ stock.unite }}</td>
-                <td>{{ stock.projet }}</td>
+                <td>{{ stock.Projets }}</td>
                 <td>{{ stock.mouvement }}</td>
                 <td>{{ stock.client }}</td>
                 <td>{{ stock.operateur }}</td>
                 <td>{{ stock.validateur }}</td>
                 <td>{{ stock.AutreSource }}</td>
+                <td>{{ stock.Demandeur }}</td>
                 <td>{{ stock.Site }}</td>
                 {# <td>{{ stock.causeAnnulation }}</td> #}
-                <td>{{ stock.dateSaisie ? stock.dateSaisie|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ stock.dateSaisie ? stock.dateSaisie|date('d/m/Y H:i:s') : '' }}</td>
                 {# <td>{{ stock.dateValidation ? stock.dateValidation|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>{{ stock.causeAnnulation }} {{ stock.Remarque }}</td>
                 <td>

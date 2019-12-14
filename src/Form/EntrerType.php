@@ -25,7 +25,7 @@ class EntrerType extends AbstractType
             ->add('produit')
             ->add('quantite', TextType::class)
             ->add('unite')
-            ->add('projet')
+            ->add('Projet')
             //->add('mouvement')
             //->add('client')
             ->add('Ajouter', SubmitType::class)

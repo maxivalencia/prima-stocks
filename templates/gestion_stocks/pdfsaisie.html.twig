@@ -39,7 +39,7 @@
     </div>
     <div class="row" style="margin-left:50px">
         <h3>Référence : {{ reference }}</h3>
-        <p><strong>Date et heure : </strong>{{ datesaisie|date('Y-m-d H:m:s')  }}</p>
+        <p><strong>Date et heure : </strong>{{ datesaisie|date('d/m/Y H:m:s')  }}</p>
     {# <h3>Demandeur : </h3>#}
         <p><strong>Opérateur : </strong>{{ operateur.nom }} {{ operateur.prenom }}</p>
         <p><strong>Objet : </strong>{{ objet }}</p>
@@ -66,6 +66,8 @@
         </thead>
         <tbody>
         {% set myVal = 1 %}
+        {% set demandeur = '' %}
+        {% set datedemande = '' %}
         {% for stock in stocks %}
             <tr>
                 <td align="center">{{ myVal }}</td>
@@ -83,6 +85,8 @@
                 {# </td> #}
             </tr>
             {% set myVal = myVal + 1 %}
+            {% set demandeur = stock.Demandeur %}
+            {% set datedemande = stock.dateSaisie|date('d/m/Y H:m:s') %}
         {% else %}
             <tr>
                 <td colspan="7">Aucun enregistrement trouver!</td>
@@ -94,12 +98,12 @@
     <table>
         <tr>
             <td align="center">
-                (Nom du demandeur)<br>
-                (Date et heure de la demande)
+                {{ demandeur }}<br>
+                {{ datedemande }}
             </td>
             <td align="center">
                 {{ validateur.nom }} {{ validateur.prenom }}<br>
-                {{ datevalidation|date('Y-m-d H:m:s') }}
+                {{ datevalidation|date('d/m/Y H:m:s') }}
             </td>
         </tr>
     </table>
