@@ -612,7 +612,7 @@ class GestionStocksController extends AbstractController
     /**
      * @Route("/gestion/entrer", name="entrer", methods={"GET","POST"})
      */
-    public function entrer(Request $request, UserRepository $userRepository, EtatsRepository $etatsrepository): Response
+    public function entrer(Request $request, StocksRepository $stocksRepository, UserRepository $userRepository, EtatsRepository $etatsrepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $stock = new Stocks;
@@ -621,6 +621,7 @@ class GestionStocksController extends AbstractController
         $form = $this->createForm(EntrerType::class, $stock);
         $form->handleRequest($request);
         $reference = $form->get('referencePanier')->getData();
+        $paniers = $stocksRepository->findBy(["reference" => $reference]);
         if($reference == ''){
             $daty   = new \DateTime(); //this returns the current date time
             $results = $daty->format('Y-m-d-H-i-s');
@@ -654,6 +655,7 @@ class GestionStocksController extends AbstractController
             'stock' => $stock,
             'form' => $form->createView(),
             'refpiecejointe' => $reference,
+            'paniers' => $paniers,
         ]);
     }
 
@@ -663,7 +665,7 @@ class GestionStocksController extends AbstractController
     /**
      * @Route("/gestion/sortie", name="sortie", methods={"GET","POST"})
      */
-    public function sortie(Request $request, UserRepository $userRepository, EtatsRepository $etatsrepository): Response
+    public function sortie(Request $request, StocksRepository $stocksRepository, UserRepository $userRepository, EtatsRepository $etatsrepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $stock = new Stocks;
@@ -673,6 +675,7 @@ class GestionStocksController extends AbstractController
         $form = $this->createForm(SortieType::class, $stock);
         $form->handleRequest($request);
         $reference = $form->get('referencePanier')->getData();
+        $paniers = $stocksRepository->findBy(["reference" => $reference]);
         if($reference == ''){
             $daty   = new \DateTime(); //this returns the current date time
             $results = $daty->format('Y-m-d-H-i-s');
@@ -713,6 +716,7 @@ class GestionStocksController extends AbstractController
             'stock' => $stock,
             'form' => $form->createView(),
             'refpiecejointe' => $reference,
+            'paniers' => $paniers,
         ]);
     }
 
@@ -720,7 +724,7 @@ class GestionStocksController extends AbstractController
     /**
      * @Route("/gestion/retour", name="retour", methods={"GET","POST"})
      */
-    public function retour(Request $request, UserRepository $userRepository, EtatsRepository $etatsrepository): Response
+    public function retour(Request $request, StocksRepository $stocksRepository, UserRepository $userRepository, EtatsRepository $etatsrepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $stock = new Stocks;
@@ -729,6 +733,7 @@ class GestionStocksController extends AbstractController
         $form = $this->createForm(SortieType::class, $stock);
         $form->handleRequest($request);
         $reference = $form->get('referencePanier')->getData();
+        $paniers = $stocksRepository->findBy(["reference" => $reference]);
         if($reference == ''){
             $daty   = new \DateTime(); //this returns the current date time
             $results = $daty->format('Y-m-d-H-i-s');
@@ -755,6 +760,7 @@ class GestionStocksController extends AbstractController
         return $this->render('gestion_stocks/retour.html.twig',[
             'stock' => $stock,
             'form' => $form->createView(),
+            'paniers' => $paniers,
         ]);
     }
 

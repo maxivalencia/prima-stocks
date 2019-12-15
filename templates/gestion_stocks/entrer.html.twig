@@ -17,5 +17,43 @@
     <br>
     <div id="fileuploader">Upload</div>
 
+    <table class="table">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                {# <th>Quantite</th> #}
+                {# <th>CauseAnnulation</th> #}
+                <th>Date Saisie</th>
+                <th>Fournisseur</th>
+                <th>Projet</th>
+                <th>Mouvement</th>
+                <th>Reférence</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock in paniers %}
+            <tr>
+                {# <td>{{ stock.id }}</td> #}
+                {# <td>{{ stock.quantite }}</td> #}
+                {# <td>{{ stock.causeAnnulation }}</td> #}
+                <td>{{ stock.dateSaisie ? stock.dateSaisie|date('d/m/Y H:i:s') : '' }}</td>
+                <td>{{ stock.client }}</td>
+                <td>{{ stock.projet }}</td>
+                <td>{{ stock.mouvement }}</td>
+                <td>{{ stock.referencePanier }}</td>
+                <td>
+                    <a href="{{ path('validation', {'ref': stock.referencePanier}) }}" class="btn btn-primary">voir</a>
+                    {# <a href="{{ path('stocks_edit', {'id': stock.id}) }}" class="btn btn-danger">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement trouver!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 </div>
 {% endblock %}

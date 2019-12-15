@@ -27,8 +27,8 @@
                 <td>{{ stock.id }}</td>
                 <td>{{ stock.quantite }}</td>
                 <td>{{ stock.causeAnnulation }}</td>
-                <td>{{ stock.dateSaisie ? stock.dateSaisie|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ stock.dateValidation ? stock.dateValidation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ stock.dateSaisie ? stock.dateSaisie|date('d/m/Y H:i:s') : '' }}</td>
+                <td>{{ stock.dateValidation ? stock.dateValidation|date('d/m/Y H:i:s') : '' }}</td>
                 <td>{{ stock.referencePanier }}</td>
                 <td>
                     <a href="{{ path('stocks_show', {'id': stock.id}) }}" class="btn btn-warning">voir</a>
