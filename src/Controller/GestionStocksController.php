@@ -621,7 +621,7 @@ class GestionStocksController extends AbstractController
         $form = $this->createForm(EntrerType::class, $stock);
         $form->handleRequest($request);
         $reference = $form->get('referencePanier')->getData();
-        $paniers = $stocksRepository->findBy(["reference" => $reference]);
+        $paniers = $stocksRepository->findBy(["referencePanier" => $reference]);
         if($reference == ''){
             $daty   = new \DateTime(); //this returns the current date time
             $results = $daty->format('Y-m-d-H-i-s');
@@ -675,7 +675,7 @@ class GestionStocksController extends AbstractController
         $form = $this->createForm(SortieType::class, $stock);
         $form->handleRequest($request);
         $reference = $form->get('referencePanier')->getData();
-        $paniers = $stocksRepository->findBy(["reference" => $reference]);
+        $paniers = $stocksRepository->findBy(["referencePanier" => $reference]);
         if($reference == ''){
             $daty   = new \DateTime(); //this returns the current date time
             $results = $daty->format('Y-m-d-H-i-s');
@@ -733,7 +733,7 @@ class GestionStocksController extends AbstractController
         $form = $this->createForm(SortieType::class, $stock);
         $form->handleRequest($request);
         $reference = $form->get('referencePanier')->getData();
-        $paniers = $stocksRepository->findBy(["reference" => $reference]);
+        $paniers = $stocksRepository->findBy(["referencePanier" => $reference]);
         if($reference == ''){
             $daty   = new \DateTime(); //this returns the current date time
             $results = $daty->format('Y-m-d-H-i-s');
