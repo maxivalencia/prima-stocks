@@ -702,6 +702,68 @@ class GestionStocksController extends AbstractController
                 $stock->setCauseAnnulation("insuffisante de stock pour :".$stock2->getCauseAnnulation());
             }
             $entityManager->flush();
+            //return $this->redirectToRoute('sortieref',["ref" => $reference]);
+
+            //return $this->redirectToRoute('nouveau');
+        }
+        
+        $daty   = new \DateTime(); //this returns the current date time
+        $results = $daty->format('Y-m-d-H-i-s');
+        $krr    = explode('-', $results);
+        $results = implode("", $krr).$this->generateUniqueFileName();
+
+        //$form->setReference($form->get('reference')->getData());
+        return $this->render('gestion_stocks/sortie.html.twig',[
+            'stock' => $stock,
+            'form' => $form->createView(),
+            'refpiecejointe' => $reference,
+            'paniers' => $paniers,
+        ]);
+    }
+
+    /**
+     * @Route("/gestion/sortieref/{ref}", name="sortieref", methods={"GET","POST"})
+     */
+    public function sortieRef(Request $request, String $ref, StocksRepository $stocksRepository, UserRepository $userRepository, EtatsRepository $etatsrepository): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $stock = new Stocks;
+        $stock2 = new Stocks;
+        $mouvementsRepository = $entityManager->getRepository(Mouvements::class);
+        $mouvement = $mouvementsRepository->findOneBy(["id" => 2]);
+        $form = $this->createForm(SortieType::class, $stock);
+        $form->handleRequest($request);
+        //$reference = $form->get('referencePanier')->getData();
+        $reference = $ref;
+        $paniers = $stocksRepository->findBy(["referencePanier" => $reference]);
+        /* if($reference == ''){
+            $daty   = new \DateTime(); //this returns the current date time
+            $results = $daty->format('Y-m-d-H-i-s');
+            $krr    = explode('-', $results);
+            $results = implode("", $krr);
+            $stock->setReferencePanier($results);
+        } */
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $stock->setDateSaisie(new \DateTime());
+            //$stock->setOperateur($userRepository->findOneBy(["id" => 1]));
+            $stock->setEtat($etatsrepository->findOneBy(["id" => 1]));
+            $stock->setReferencePanier($reference);
+            $stock->setMouvement($mouvement);
+            $username = $this->getUser();
+            $user = $userRepository->findOneBy(["login" => $username->getUsername()]);
+            $stock->setOperateur($user);
+            $stock->setCauseAnnulation("Sortie standard");
+            //$stock->setPiece($reference);
+            $entityManager->persist($stock);
+            if($stock->getAutreSource() != null){
+                $stock2 = $stock->getAutreSource();
+                $stock2->setQuantite($stock->getQuantite());
+                $stock->setCauseAnnulation("insuffisance de stock pour :".$stock2->getCauseAnnulation());
+            }
+            $entityManager->flush();
+            return $this->redirectToRoute('sortieref',["ref" => $reference]);
 
             //return $this->redirectToRoute('nouveau');
         }

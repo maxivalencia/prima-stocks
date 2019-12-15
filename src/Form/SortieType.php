@@ -21,12 +21,13 @@ class SortieType extends AbstractType
         $krr    = explode('-', $results);
         $results = implode("", $krr);
         $builder
+            ->add('reference')
             ->add('referencePanier', HiddenType::class, [
                 'data' => $results,
             ])
             ->add('produit', EntityType::class, [
                 'class' => Produits::class,
-                'label' => 'Unité destinataire',
+                'label' => 'Produit',
                 'required' => true,
                 'attr' => [
                     'class' => 'restante',
@@ -34,7 +35,6 @@ class SortieType extends AbstractType
                     'data-live-search' => true,
                 ],
             ])
-            ->add('reference')
             ->add('quantite', TextType::class)
             ->add('unite')
             ->add('Projets')
