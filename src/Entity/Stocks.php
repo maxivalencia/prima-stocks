@@ -139,6 +139,11 @@ class Stocks
      */
     private $Demandeur;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $autreSource;
+
     public function __construct()
     {
         $this->stocks = new ArrayCollection();

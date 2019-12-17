@@ -41,7 +41,7 @@ class SortieType extends AbstractType
             ->add('Demandeur')
             //->add('mouvement')
             ->add('Site')
-            ->add('AutreSource', null, [
+            ->add('autreSource', null, [
                 'label' => 'Autre source'
             ])
             ->add('Remarque')
